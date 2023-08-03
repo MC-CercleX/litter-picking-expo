@@ -178,7 +178,7 @@ const MapScreen = ({navigation, route}) => {
   return (
     <SafeAreaView style={Styles.safeAreaView}>
     <StatusBar backgroundColor={Colors.PrimaryColor}/>
-      {/* <View style={styles.topContainer}>
+      <View style={styles.topContainer}>
         <View style={styles.inputContainer}>
           <View style={[Styles.flexBetween, {}]}>
             <Icon
@@ -205,10 +205,10 @@ const MapScreen = ({navigation, route}) => {
             />
           </Pressable>
         </View>
-      </View> */}
+      </View>
 
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
-         {/* <View style={styles.container}>
+         <View style={styles.container}>
           <MapView
             style={styles.mapStyle}
             initialRegion={{
@@ -221,7 +221,7 @@ const MapScreen = ({navigation, route}) => {
             // customMapStyle={mapStyle}
             key={"AIzaSyD1OenwxgJVX_bh1rF_NrX4mWOsMlV6hMc"}
           ></MapView>
-        </View> */}
+        </View>
        
         {/* <HomeTabView /> */}
 
@@ -338,8 +338,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
-    marginVertical: hp("2%"),
+    marginBottom: hp("2%"),
     justifyContent: "space-between",
+    marginTop: hp('5%')
   },
   topContainer: {
     backgroundColor: Colors.White,

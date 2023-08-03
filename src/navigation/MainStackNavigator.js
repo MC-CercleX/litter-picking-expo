@@ -18,6 +18,7 @@ import LitterDetails from "../screens/LitterDetails";
 import UploadResolved from "../screens/UploadResolved";
 import ResolveSuccess from "../screens/ResolveSuccess";
 import ViewProfile from "../screens/ViewProfile";
+import { ConnectionOff, Erroroccured_1, Erroroccured_2, LocationError } from "../screens/ErrorScreens/ConnectionOff";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,12 @@ const MainStack = () => {
       <Stack.Screen name="UploadResolvedScreen" component={UploadResolved} />
       <Stack.Screen name="ResolveSuccessScreen" component={ResolveSuccess} />
       <Stack.Screen name="ViewProfileScreen" component={ViewProfile} />
+
+      {/************ Error Screens ************/}
+      <Stack.Screen name="ConnectionOff" component={ConnectionOff} />
+      <Stack.Screen name="Erroroccured_1" component={Erroroccured_1} />
+      <Stack.Screen name="Erroroccured_2" component={Erroroccured_2} />
+      <Stack.Screen name="LocationError" component={LocationError} />
     </Stack.Navigator>
   );
 };

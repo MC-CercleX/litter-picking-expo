@@ -42,4 +42,8 @@ export const Images = {
       like: require('../assets/images/like.png'),
       unlike: require('../assets/images/unlike.png'),
       expandContent: require('../assets/images/expand_content.png'),
+      connectionoff: require('../assets/images/connectionoff.png'),
+      erroroccured_1: require('../assets/images/erroroccured_1.png'),
+      erroroccured_2: require('../assets/images/erroroccured_2.png'),
+      locationerror: require('../assets/images/locationerror.png'),
 }

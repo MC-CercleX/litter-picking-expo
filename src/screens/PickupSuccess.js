@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   widthPercentageToDP as wp,
@@ -12,11 +12,36 @@ import { FontSizes } from '../styles/fonts';
 import { Images } from '../constants/images';
 
 const PickupSuccess = ({navigation}) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(-300)).current;
+  const slideFromLeftAnim = useRef(new Animated.Value(-300)).current;
+  const slideFromBottomAnim = useRef(new Animated.Value(1000)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(slideFromLeftAnim, {
+        toValue: 0,
+        duration: 500, // Adjust the duration as needed
+        useNativeDriver: false, // This must be set to false for layout animation
+      }),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000, // Animation duration
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideFromBottomAnim, {
+        toValue: 0,
+        duration: 750,
+        useNativeDriver: false,
+      }),
+  ]).start();
+  }, [slideFromLeftAnim, fadeAnim, slideFromBottomAnim]);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ alignSelf: 'flex-start', marginTop: hp('3%') }}>
+        <Animated.View style={{ alignSelf: 'flex-start', marginTop: hp('3%'), left: slideFromLeftAnim }}>
           <Image source={Images.animatedtruckleft} style={{ width: 195.1, height: 142.35 }}/>
-        </View>
+        </Animated.View>
         <View style={styles.checkView}>
             <Icon name="check" type="material" size={24} color={Colors.White} />
         </View>
@@ -28,17 +53,19 @@ const PickupSuccess = ({navigation}) => {
         <View>
             <TextModal style={[styles.successText, { fontFamily: 'Book', fontSize: FontSizes.Primary_Medium, }]}>17 July 2023</TextModal>
         </View>
-        <Button
-        disabledStyle={{ backgroundColor: '#B3B3B3' }}
-        disabledTitleStyle={{ color: Colors.White }}
-        onPress={()=>{navigation.navigate('Map')}}
-        title={'BACK TO HOME'}
-        titleStyle={styles.buttonTitle}
-        buttonStyle={[styles.button, { alignSelf: 'center', marginTop: hp('6%'), marginBottom: hp('9%') }]}
-        />
-        <View style={{ alignSelf: 'flex-start', marginLeft: wp('5%') }}>
+        <Animated.View style={{ opacity: fadeAnim }}>
+          <Button
+          disabledStyle={{ backgroundColor: '#B3B3B3' }}
+          disabledTitleStyle={{ color: Colors.White }}
+          onPress={()=>{navigation.navigate('Map')}}
+          title={'BACK TO HOME'}
+          titleStyle={styles.buttonTitle}
+          buttonStyle={[styles.button, { alignSelf: 'center', marginTop: hp('6%'), marginBottom: hp('9%') }]}
+          />
+        </Animated.View>
+        <Animated.View style={{ alignSelf: 'flex-start', marginLeft: wp('5%'), top: slideFromBottomAnim }}>
           <Image source={Images.thumbsup_man} style={{ width: 137.6, height: 178 }}/>
-        </View>
+        </Animated.View>
     </SafeAreaView>
   );
 };
